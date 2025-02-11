@@ -3,29 +3,98 @@ import { chipImg, frameImg, frameVideo } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { animateWithGsap } from "../utils/animations";
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
 const HowItWorks = () => {
   const videoRef = useRef();
 
+
   useGSAP(() => {
+    ScrollTrigger.normalizeScroll({
+      allowNestedScroll: true,
+      lockAxis: false,
+      momentum: self => Math.min(3, self.velocityY / 1000),
+      type: "touch,wheel,pointer",
+    });
+  
     gsap.from("#chip", {
       scrollTrigger: {
         trigger: "#chip",
         start: "20% bottom",
+        end: "top top",
+        scrub: true,
+        invalidateOnRefresh: true,
+        pinType: "transform", 
       },
       opacity: 0,
       scale: 2,
       duration: 2,
       ease: "power2.inOut",
     });
-
-    animateWithGsap(".g_fadeIn", {
-      opacity: 1,
-      y: 0,
-      duration: 2,
-      ease: "power2.inOut",
+  
+    gsap.utils.toArray(".g_fadeIn").forEach((elem) => {
+      gsap.from(elem, {
+        scrollTrigger: {
+          trigger: elem,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+          invalidateOnRefresh: true,
+        },
+        opacity: 0,
+        y: 50,
+        duration: 2,
+        ease: "power2.inOut",
+      });
+    });
+  
+    window.addEventListener("orientationchange", () => {
+      ScrollTrigger.refresh();
     });
   }, []);
+  
+// useGSAP(() => {
+//   // Enable Scroll Normalization
+//   ScrollTrigger.normalizeScroll({ 
+//     allowNestedScroll: true,
+//     lockAxis: false,
+//     momentum: self => Math.min(3, self.velocityY / 1000),
+//     type: "touch,wheel,pointer",
+//   });
+
+//   // ScrollTrigger Animation for #chip
+//   gsap.from("#chip", {
+//     scrollTrigger: {
+//       trigger: "#chip",
+//       start: "20% bottom",
+//       end: "top top",
+//       scrub: true,  // Ensures smooth scrolling effect
+//     },
+//     opacity: 0,
+//     scale: 2,
+//     duration: 2,
+//     ease: "power2.inOut",
+//   });
+
+//   // General Fade-in Animation
+//   gsap.utils.toArray(".g_fadeIn").forEach((elem) => {
+//     gsap.from(elem, {
+//       scrollTrigger: {
+//         trigger: elem,
+//         start: "top 80%",
+//         toggleActions: "play none none reverse",
+//       },
+//       opacity: 0,
+//       y: 50,
+//       duration: 2,
+//       ease: "power2.inOut",
+//     });
+//   });
+
+//   // Optional: Toggle Scroll Normalization
+//   ScrollTrigger.normalizeScroll(true);  // Enable
+//   // ScrollTrigger.normalizeScroll(false); // Disable when needed
+// }, []);
 
   return (
     <section className="common-padding">
