@@ -35,6 +35,10 @@ const VideoCarousel = () => {
     // video animation to play the video when it is in the view
     gsap.to("#video", {
       scrollTrigger: {
+
+pinType: "transform",
+invalidateOnRefresh: true,
+
         trigger: "#video",
         toggleActions: "restart none none none",
       },

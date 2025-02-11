@@ -2,6 +2,25 @@ import React, { useRef } from "react";
 import { chipImg, frameImg, frameVideo } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// gsap.registerPlugin(ScrollTrigger);
+
+// ScrollTrigger.normalizeScroll({
+//   allowNestedScroll: true,
+//   lockAxis: false,
+//   momentum: (self) => Math.min(3, self.velocityY / 1000),
+//   type: "touch,wheel,pointer",
+// });
+
+// window.addEventListener("orientationchange", () => {
+//   ScrollTrigger.refresh();
+// });
+
+// return () => {
+//   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+// };
+
 import { animateWithGsap } from "../utils/animations";
 
 const HowItWorks = () => {
@@ -10,6 +29,10 @@ const HowItWorks = () => {
   useGSAP(() => {
     gsap.from("#chip", {
       scrollTrigger: {
+
+pinType: "transform",
+invalidateOnRefresh: true,
+
         trigger: "#chip",
         start: "20% bottom",
       },

@@ -1,5 +1,24 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// gsap.registerPlugin(ScrollTrigger);
+
+// ScrollTrigger.normalizeScroll({
+//   allowNestedScroll: true,
+//   lockAxis: false,
+//   momentum: (self) => Math.min(3, self.velocityY / 1000),
+//   type: "touch,wheel,pointer",
+// });
+
+// window.addEventListener("orientationchange", () => {
+//   ScrollTrigger.refresh();
+// });
+
+// return () => {
+//   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+// };
+
 import ModelView from "./ModelView";
 import { useEffect, useRef, useState } from "react";
 import { yellowImg } from "../utils";

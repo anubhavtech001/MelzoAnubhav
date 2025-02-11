@@ -14,6 +14,10 @@ const Features = () => {
     // ✅ Create ScrollTrigger instance
     const videoTrigger = gsap.to("#exploreVideo", {
       scrollTrigger: {
+
+pinType: "transform",
+invalidateOnRefresh: true,
+
         trigger: "#exploreVideo",
         toggleActions: "play pause reverse restart",
         start: "-10% bottom",
