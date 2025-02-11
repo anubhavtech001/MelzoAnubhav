@@ -51,7 +51,7 @@ const HowItWorks = () => {
     gsap.from("#chip", {
       scrollTrigger: {
         trigger: "#chip",
-        start: "top 85%",
+        start: "20% bottom",
         // end: "top top",
         scrub: true,
         pinType: "transform",  // ✅ Fixes sticky issues on iOS

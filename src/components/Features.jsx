@@ -42,7 +42,7 @@ const Features = () => {
     animateWithGsap(".g_text", {
       y: 0,
       opacity: 1,
-      ease: "circ",
+      ease: "power2.inOut",
       duration: 2,
     });
 
