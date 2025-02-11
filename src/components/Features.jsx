@@ -42,8 +42,7 @@ const Features = () => {
     animateWithGsap(".g_text", {
       y: 0,
       opacity: 1,
-      ease: "circ",
-      duration: 2,
+      
     });
 
     // ✅ Cleanup with null check

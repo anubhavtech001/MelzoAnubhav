@@ -52,7 +52,6 @@ const HowItWorks = () => {
       scrollTrigger: {
         trigger: "#chip",
         start: "top 85%",
-
         // end: "top top",
         scrub: true,
         pinType: "transform",  // ✅ Fixes sticky issues on iOS
@@ -67,8 +66,7 @@ const HowItWorks = () => {
     animateWithGsap(".g_fadeIn", {
       opacity: 1,
       y: 0,
-      duration: 2,
-      ease: "power2.inOut",
+     
     });
   }, []);
 
