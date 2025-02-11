@@ -51,8 +51,9 @@ const HowItWorks = () => {
     gsap.from("#chip", {
       scrollTrigger: {
         trigger: "#chip",
-        start: "20% bottom",
-        end: "top top",
+        start: "top 85%",
+
+        // end: "top top",
         scrub: true,
         pinType: "transform",  // ✅ Fixes sticky issues on iOS
         invalidateOnRefresh: true,  // ✅ Handles screen resize/orientation changes
@@ -60,14 +61,14 @@ const HowItWorks = () => {
       opacity: 0,
       scale: 2,
       duration: 2,
-      ease: "expo.out",
+      ease: "power2.inOut",
     });
     
     animateWithGsap(".g_fadeIn", {
       opacity: 1,
       y: 0,
       duration: 2,
-      ease: "expo.out",
+      ease: "power2.inOut",
     });
   }, []);
 

@@ -14,9 +14,8 @@ const Features = () => {
     // ✅ Create ScrollTrigger instance
     const videoTrigger = gsap.to("#exploreVideo", {
       scrollTrigger: {
-
-pinType: "transform",
-invalidateOnRefresh: true,
+        pinType: "transform",
+        invalidateOnRefresh: true,
 
         trigger: "#exploreVideo",
         toggleActions: "play pause reverse restart",
@@ -43,8 +42,8 @@ invalidateOnRefresh: true,
     animateWithGsap(".g_text", {
       y: 0,
       opacity: 1,
-      ease: "expo.out",
-      duration: 1,
+      ease: "circ",
+      duration: 2,
     });
 
     // ✅ Cleanup with null check
@@ -108,25 +107,26 @@ invalidateOnRefresh: true,
               <div className="feature-text-container">
                 <div className="flex-1 flex-center">
                   <p className="feature-text g_text">
-                  Experiential learning is impossible without {" "}
+                    Experiential learning is impossible without{" "}
+                    <span className="text-white">5D technology</span>. Melzo
+                    Anubhav is{" "}
                     <span className="text-white">
-                    5D technology
+                      1<sup>st</sup>{" "}
                     </span>
-                    . Melzo Anubhav is{" "}
-                    <span className="text-white">
-                    
-                     1<sup>st</sup> { " "}
-                    </span> 
-                     of its kind to bring this technology into classroom that allows student to perform experiments in a <span className="text-white">new and safe</span> way. {" "}
-
+                    of its kind to bring this technology into classroom that
+                    allows student to perform experiments in a{" "}
+                    <span className="text-white">new and safe</span> way.{" "}
                     {/* , using the same alloy that spacecrafts use for missions to */}
-                    
                   </p>
                 </div>
 
                 <div className="flex-1 flex-center">
                   <p className="feature-text g_text">
-                  Make learning come alive with <span className="text-white">sensory simulations</span>. Imagine experiencing underwater scuba diving or embarking on a mission to the moon. <span className="text-white">
+                    Make learning come alive with{" "}
+                    <span className="text-white">sensory simulations</span>.
+                    Imagine experiencing underwater scuba diving or embarking on
+                    a mission to the moon.{" "}
+                    <span className="text-white">
                       {/* lightest Pro models ever. */}
                     </span>
                     {/* You'll notice the difference the moment you pick one up. */}
