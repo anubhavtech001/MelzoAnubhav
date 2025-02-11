@@ -33,6 +33,7 @@ const Hero = () => {
   }, []);
 
   return (
+    <div>
     <section className="w-full nav-height bg-black relative ">
       <div className="h-5/6 w-full flex-center flex-col "> 
         {/* <p id="hero" className="hero-title">
@@ -61,6 +62,7 @@ const Hero = () => {
         {/* <p className="font-normal text-xl">From $199/month or $999</p> */}
       </div>
     </section>
+    </div>
   );
 };
 

@@ -26,6 +26,7 @@ function Model(props) {
   }, [materials, props.item]);
 
   return (
+    
     <group {...props} dispose={null}>
     <group position={[-0.75, 1.023, 0.055]} scale={0.148}>
       <group position={[5.084, -6.932, -0.376]}>

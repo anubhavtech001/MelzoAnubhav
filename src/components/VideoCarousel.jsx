@@ -156,7 +156,7 @@ const VideoCarousel = () => {
   const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e]);
 
   return (
-    <>
+    <div>
       <div className="flex items-center">
         {hightlightsSlides.map((list, i) => (
           <div key={list.id} id="slider" className="sm:pr-20 pr-10">
@@ -227,7 +227,7 @@ const VideoCarousel = () => {
           />
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -11,6 +11,7 @@ const Highlights = () => {
   }, []);
 
   return (
+    <div>
     <section
       id="highlights"
       className="w-screen overflow-hidden h-full common-padding bg-zinc"
@@ -40,6 +41,7 @@ const Highlights = () => {
         <VideoCarousel />
       </div>
     </section>
+    </div>
   );
 };
 

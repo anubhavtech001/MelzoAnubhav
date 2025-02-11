@@ -21,6 +21,7 @@ const ModelView = ({
   item,
 }) => {
   return (
+    <div>
     <View
       index={index}
       id={gsapType}
@@ -57,6 +58,7 @@ const ModelView = ({
         </Suspense>
       </group>
     </View>
+    </div>
   );
 };
 
