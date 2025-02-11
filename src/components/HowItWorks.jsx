@@ -38,14 +38,14 @@ invalidateOnRefresh: true,
       },
       opacity: 0,
       scale: 2,
-      duration: 2,
+      // duration: 2,
       ease: "power2.inOut",
     });
 
     animateWithGsap(".g_fadeIn", {
       opacity: 1,
       y: 0,
-      duration: 2,
+      // duration: 2,
       ease: "power2.inOut",
     });
   }, []);

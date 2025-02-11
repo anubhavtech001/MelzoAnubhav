@@ -44,7 +44,7 @@ invalidateOnRefresh: true,
       y: 0,
       opacity: 1,
       ease: "power2.inOut",
-      duration: 1,
+      
     });
 
     // ✅ Cleanup with null check
