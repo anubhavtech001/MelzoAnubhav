@@ -69,12 +69,6 @@ const HowItWorks = () => {
       duration: 2,
       ease: "power2.inOut",
     });
-
-      animateWithGsap(
-          ".g_grow",
-          { scale: 1.1, opacity: 1, ease: "power1" },
-          { scrub: 5.5 }
-        );
   }, []);
 
   return (
@@ -107,9 +101,10 @@ const HowItWorks = () => {
                 className="bg-transparent relative z-10"
               />
             </div>
-            <div className="hiw-video">
+            <div className="hiw-video" id="chip">
               <video
-                className="pointer-events-none g_grow "
+              id="chip"
+                className="pointer-events-none"
                 playsInline
                 preload="none"
                 muted

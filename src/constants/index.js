@@ -33,7 +33,7 @@ export const hightlightsSlides = [
   },
   {
     id: 3,
-    textLists: ["Experience wind...",
+    textLists: ["Experience the wind.",
       //  "What will yours do?."
       ],
     video: highlightThirdVideo,
@@ -42,7 +42,7 @@ export const hightlightsSlides = [
   {
     id: 4,
     textLists: [
-      "Experience vibration...",
+      "Experience the vibration.",
       // "longest feel of any Anubhav lab contain.",
       // "be sensible of Air, Mist, and Quiver",
     ],
@@ -61,13 +61,13 @@ export const models = [
   {
     id: 2,
     title: "Anubhav 5D Lab in Blue",
-    color: ["#6395ff", "#6395ff", "#21242e"],
+    color: ["#21849D", "#21849D", "#fff"],
     img: blueImg,
   },
   {
     id: 3,
     title: "Anubhav 5D Lab in Green",
-    color: ["#006A4E", "#ffffff", "#C9C8C2"],
+    color: ["#357a38", "#fff", "#fff"],
     img: whiteImg,
   },
   {

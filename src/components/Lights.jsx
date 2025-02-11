@@ -19,7 +19,7 @@ const Lights = () => {
             intensity={3}
             position={[-1, 0, -10]}
             scale={5}
-            color={"#000"}
+            color={"#fff"}
           />
           <Lightformer
             form="rect"

@@ -49,7 +49,7 @@ const Highlights = () => {
             </a>
             <a href="https://drive.google.com/file/d/1ay6AHuu7fCQVGlIlZGPdkRPHj64A-NZj/view?usp=sharing">
               <p className="link">
-                Watch the Brochure
+              Download the Brochure
                 <img src={rightImg} alt="right" className="ml-2" />
               </p>
             </a>
