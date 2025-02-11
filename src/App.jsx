@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
+    <div>
     <main className="bg-black">
       <Navbar />
       <Hero />
@@ -20,6 +21,7 @@ const App = () => {
       {/* <Inquiry /> */}
       <Footer />
     </main>
+    </div>
   );
 };
 export default Sentry.withProfiler(App);

@@ -28,7 +28,6 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <div>
     <section className="common-padding">
       <div className="screen-max-width">
         <div id="chip" className="flex-center w-full my-20">
@@ -103,7 +102,6 @@ const HowItWorks = () => {
         </div>
       </div>
     </section>
-    </div>
   );
 };
 

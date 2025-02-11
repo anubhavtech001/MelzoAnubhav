@@ -3,7 +3,6 @@ import { footerLinks } from "../constants";
 
 const Footer = () => {
   return (
-    <div>
     <footer className="py-5 sm:px-10 px-5">
       <div className="screen-max-width">
         {/* <div>
@@ -37,7 +36,6 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-    </div>
   );
 };
 
