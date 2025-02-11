@@ -63,7 +63,7 @@ canvas {
   }
 
   .feature-text {
-    @apply text-gray max-w-md text-lg md:text-xl font-semibold  translate-y-[0px];
+    @apply text-gray max-w-md text-lg md:text-xl font-semibold  translate-y-[100px];
   }
 
   .feature-text-container {
@@ -119,6 +119,6 @@ canvas {
   }
 
   .g_fadeIn {
-    @apply translate-y-[0px];
+    @apply translate-y-[100px];
   }
 }
