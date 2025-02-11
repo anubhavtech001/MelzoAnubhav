@@ -27,25 +27,46 @@ const HowItWorks = () => {
   const videoRef = useRef();
 
   useGSAP(() => {
+    // gsap.from("#chip", {
+    //   scrollTrigger: {
+    //     pinType: "transform",
+    //     invalidateOnRefresh: true,
+
+    //     trigger: "#chip",
+    //     start: "20% bottom",
+    //   },
+    //   opacity: 0,
+    //   scale: 2,
+    //   duration: 2,
+    //   ease: "power2.inOut",
+    // });
+
+    // animateWithGsap(".g_fadeIn", {
+    //   opacity: 1,
+    //   y: 0,
+    //   duration: 2,
+    //   ease: "power2.inOut",
+    // });
+
     gsap.from("#chip", {
       scrollTrigger: {
-
-pinType: "transform",
-invalidateOnRefresh: true,
-
         trigger: "#chip",
         start: "20% bottom",
+        end: "top top",
+        scrub: true,
+        pinType: "transform",  // ✅ Fixes sticky issues on iOS
+        invalidateOnRefresh: true,  // ✅ Handles screen resize/orientation changes
       },
       opacity: 0,
       scale: 2,
-      // duration: 2,
+      duration: 2,
       ease: "power2.inOut",
     });
-
+    
     animateWithGsap(".g_fadeIn", {
       opacity: 1,
       y: 0,
-      // duration: 2,
+      duration: 2,
       ease: "power2.inOut",
     });
   }, []);
@@ -64,7 +85,9 @@ invalidateOnRefresh: true,
           </h2>
 
           <p className="hiw-subtitle">
-          The Anubhav Lab chip integrates embedded Bluetooth technology, ensuring seamless connectivity with Meta Quest device for an enhanced 5D experience.
+            The Anubhav Lab chip integrates embedded Bluetooth technology,
+            ensuring seamless connectivity with Meta Quest device for an
+            enhanced 5D experience.
             {/* It's here. The biggest redesign in the history of Anubhav Lab chip. */}
           </p>
         </div>
@@ -86,7 +109,6 @@ invalidateOnRefresh: true,
                 muted
                 autoPlay
                 loop
-                
                 ref={videoRef}
               >
                 <source src={frameVideo} type="video/mp4" />
@@ -101,9 +123,9 @@ invalidateOnRefresh: true,
         <div className="hiw-text-container">
           <div className="flex flex-1 justify-center flex-col">
             <p className="hiw-text g_fadeIn">
-            Anubhav Lab is a breakthrough in 5D technology, setting a { " "}
+              Anubhav Lab is a breakthrough in 5D technology, setting a{" "}
               <span className="text-white">
-              new benchmark for performance and future digital innovation
+                new benchmark for performance and future digital innovation
               </span>
               .
             </p>
