@@ -79,7 +79,7 @@ export const models = [
 ];
 
 export const sizes = [
-  { label: '30"', value: "small" },
+  // { label: '30"', value: "small" },
   // { label: '6.7"', value: "large" },
 ];
 

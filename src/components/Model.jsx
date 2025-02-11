@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll({
   allowNestedScroll: true,
   lockAxis: false,
-  momentum: (self) => Math.min(3, self.velocityY / 1000),
+  momentum: (self) => Math.min(2, self.velocityY / 1000),
   type: "touch,wheel,pointer",
 });
 
@@ -131,7 +131,7 @@ const Model = () => {
                 ))}
               </ul>
 
-              <button className="size-btn-container">
+              {/* <button className="size-btn-container">
                 {sizes.map(({ label, value }) => (
                   <span
                     key={label}
@@ -145,7 +145,7 @@ const Model = () => {
                     {label}
                   </span>
                 ))}
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

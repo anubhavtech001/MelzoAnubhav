@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll({
   allowNestedScroll: true,
   lockAxis: false,
-  momentum: (self) => Math.min(3, self.velocityY / 1000),
+  momentum: (self) => Math.min(2, self.velocityY / 1000),
   type: "touch,wheel,pointer",
 });
 
