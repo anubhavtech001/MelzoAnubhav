@@ -14,8 +14,9 @@ const Features = () => {
     // ✅ Create ScrollTrigger instance
     const videoTrigger = gsap.to("#exploreVideo", {
       scrollTrigger: {
-        pinType: "transform",
-        invalidateOnRefresh: true,
+
+pinType: "transform",
+invalidateOnRefresh: true,
 
         trigger: "#exploreVideo",
         toggleActions: "play pause reverse restart",
@@ -33,46 +34,17 @@ const Features = () => {
       },
     });
 
-    animateWithGsap("#features_title", {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#features_title",
-        start: "top 90%",
-        end: "bottom top",
-        scrub: true,
-        pinType: "transform",  // ✅ Improves scroll behavior on iOS
-        invalidateOnRefresh: true,
-      },
-    });
-    
-    animateWithGsap(".g_grow", {
-      scale: 0.8,
-      opacity: 1,
-      ease: "power1",
-      scrollTrigger: {
-        trigger: ".g_grow",
-        start: "top 85%",
-        end: "bottom top",
-        scrub: 5.5,
-        pinType: "transform",
-        invalidateOnRefresh: true,
-      },
-    }, { scrub: 5.5 });
-    
+    animateWithGsap("#features_title", { y: 0, opacity: 1 });
+    animateWithGsap(
+      ".g_grow",
+      { scale: 0.8, opacity: 1, ease: "power1" },
+      { scrub: 5.5 }
+    );
     animateWithGsap(".g_text", {
       y: 0,
       opacity: 1,
-      ease: "power2.inOut",
+      ease: "expo.out",
       duration: 1,
-      scrollTrigger: {
-        trigger: ".g_text",
-        start: "top 85%",
-        end: "bottom top",
-        scrub: true,
-        pinType: "transform",
-        invalidateOnRefresh: true,
-      },
     });
 
     // ✅ Cleanup with null check
@@ -136,26 +108,25 @@ const Features = () => {
               <div className="feature-text-container">
                 <div className="flex-1 flex-center">
                   <p className="feature-text g_text">
-                    Experiential learning is impossible without{" "}
-                    <span className="text-white">5D technology</span>. Melzo
-                    Anubhav is{" "}
+                  Experiential learning is impossible without {" "}
                     <span className="text-white">
-                      1<sup>st</sup>{" "}
+                    5D technology
                     </span>
-                    of its kind to bring this technology into classroom that
-                    allows student to perform experiments in a{" "}
-                    <span className="text-white">new and safe</span> way.{" "}
+                    . Melzo Anubhav is{" "}
+                    <span className="text-white">
+                    
+                     1<sup>st</sup> { " "}
+                    </span> 
+                     of its kind to bring this technology into classroom that allows student to perform experiments in a <span className="text-white">new and safe</span> way. {" "}
+
                     {/* , using the same alloy that spacecrafts use for missions to */}
+                    
                   </p>
                 </div>
 
                 <div className="flex-1 flex-center">
                   <p className="feature-text g_text">
-                    Make learning come alive with{" "}
-                    <span className="text-white">sensory simulations</span>.
-                    Imagine experiencing underwater scuba diving or embarking on
-                    a mission to the moon.{" "}
-                    <span className="text-white">
+                  Make learning come alive with <span className="text-white">sensory simulations</span>. Imagine experiencing underwater scuba diving or embarking on a mission to the moon. <span className="text-white">
                       {/* lightest Pro models ever. */}
                     </span>
                     {/* You'll notice the difference the moment you pick one up. */}
