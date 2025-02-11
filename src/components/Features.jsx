@@ -3,113 +3,54 @@ import React, { useRef } from "react";
 import { animateWithGsap } from "../utils/animations";
 import { explore1Img, explore2Img, exploreVideo } from "../utils";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Features = () => {
-  
-  const videoRef = useRef();
+  const videoRef = useRef(null);
 
-  // useGSAP(() => {
-  //   gsap.to("#exploreVideo", {
-  //     scrollTrigger: {
-  //       trigger: "#exploreVideo",
-  //       toggleActions: "play pause reverse restart",
-  //       start: "-10% bottom",
-  //       type: "touch,wheel,pointer",
-  //     },
-  //     onComplete: () => {
-  //       videoRef.current.play();
-  //     },
-  //   });
-
-  //   animateWithGsap("#features_title", { y: 0, opacity: 1 });
-  //   animateWithGsap(
-  //     ".g_grow",
-  //     { scale: 0.8, opacity: 1, ease: "power1" },
-  //     { scrub: 5.5 }
-  //   );
-  //   animateWithGsap(".g_text", {
-  //     y: 0,
-  //     opacity: 1,
-  //     ease: "power2.inOut",
-  //     duration: 1,
-  //   });
-  // }, []);
   useGSAP(() => {
-    // Scroll Normalization
-    ScrollTrigger.normalizeScroll({
-      allowNestedScroll: true,
-      lockAxis: false,
-      momentum: (self) => Math.min(3, self.velocityY / 1000),
-      type: "touch,wheel,pointer",
-    });
-
-    // Video Scroll Animation
-    gsap.to("#exploreVideo", {
+    // ✅ Create ScrollTrigger instance
+    const videoTrigger = gsap.to("#exploreVideo", {
       scrollTrigger: {
         trigger: "#exploreVideo",
         toggleActions: "play pause reverse restart",
         start: "-10% bottom",
-        end: "top top",
-        scrub: true, // Ensures smooth scrolling
-        pinType: "transform", // Fixes mobile Safari issues
-        invalidateOnRefresh: true, // Recalculate on resize/orientation change
-        onEnter: () => videoRef.current?.play(),
-        onLeaveBack: () => videoRef.current?.pause(),
+        onEnter: () => {
+          if (videoRef.current) {
+            videoRef.current.play();
+          }
+        },
+        onLeaveBack: () => {
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        },
       },
     });
 
-    // Title Animation
-    gsap.from("#features_title", {
-      scrollTrigger: {
-        trigger: "#features_title",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-        invalidateOnRefresh: true,
-      },
-      y: 50,
-      opacity: 0,
+    animateWithGsap("#features_title", { y: 0, opacity: 1 });
+    animateWithGsap(
+      ".g_grow",
+      { scale: 0.8, opacity: 1, ease: "power1" },
+      { scrub: 5.5 }
+    );
+    animateWithGsap(".g_text", {
+      y: 0,
+      opacity: 1,
+      ease: "power2.inOut",
       duration: 1,
-      ease: "power2.out",
     });
 
-    // Growing Effect Animation
-    gsap.utils.toArray(".g_grow").forEach((elem) => {
-      gsap.from(elem, {
-        scrollTrigger: {
-          trigger: elem,
-          start: "top bottom",
-          scrub: 5.5,
-          invalidateOnRefresh: true,
-        },
-        scale: 0.8,
-        opacity: 0,
-        ease: "power1.out",
-      });
-    });
-
-    // Text Fade-in Animation
-    gsap.utils.toArray(".g_text").forEach((elem) => {
-      gsap.from(elem, {
-        scrollTrigger: {
-          trigger: elem,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-          invalidateOnRefresh: true,
-        },
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.inOut",
-      });
-    });
-
-    // Refresh ScrollTrigger on Orientation Change
-    window.addEventListener("orientationchange", () => {
-      ScrollTrigger.refresh();
-    });
-
+    // ✅ Cleanup with null check
+    return () => {
+      if (videoTrigger && videoTrigger.scrollTrigger) {
+        videoTrigger.scrollTrigger.kill(); // ✅ Kill only if it exists
+      }
+    };
   }, []);
+
   return (
     <section className="h-full common-padding bg-zinc relative overflow-hidden">
       <div className="screen-max-wdith">
