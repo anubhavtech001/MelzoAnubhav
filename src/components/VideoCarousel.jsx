@@ -1,212 +1,126 @@
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-import { useEffect, useRef, useState } from "react";
 
 import { hightlightsSlides } from "../constants";
-import { pauseImg, playImg, replayImg } from "../utils";
 
 const VideoCarousel = () => {
   const videoRef = useRef([]);
-  const videoSpanRef = useRef([]);
-  const videoDivRef = useRef([]);
-
+  const textListRef = useRef([]);
   const [video, setVideo] = useState({
-    isEnd: false,
-    startPlay: false,
     videoId: 0,
-    isLastVideo: false,
-    isPlaying: false,
+    isVideoVisible: false,
   });
 
-  const [loadedData, setLoadedData] = useState([]);
-  const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
-
-  useGSAP(() => {
-    gsap.to("#slider", {
-      transform: `translateX(${-100 * videoId}%)`,
-      duration: 1,
-      ease: "power2.inOut",
-    });
-
-    gsap.to("#video", {
-      scrollTrigger: {
-        pinType: "transform",
-        invalidateOnRefresh: true,
-        trigger: "#video",
-        toggleActions: "restart none none none",
-      },
-      onComplete: () => {
-        setVideo((pre) => ({
-          ...pre,
-          startPlay: true,
-          isPlaying: true,
-        }));
-      },
-    });
-  }, [isEnd, videoId]);
+  const { videoId, isVideoVisible } = video;
 
   useEffect(() => {
-    let currentProgress = 0;
-    let span = videoSpanRef.current;
-
-    if (span[videoId] && videoRef.current[videoId]) {
-      let anim = gsap.to(span[videoId], {
-        onUpdate: () => {
-          const progress = Math.ceil(anim.progress() * 100);
-          if (progress !== currentProgress) {
-            currentProgress = progress;
-
-            gsap.to(videoDivRef.current[videoId], {
-              width:
-                window.innerWidth < 760
-                  ? "10vw"
-                  : window.innerWidth < 1200
-                  ? "10vw"
-                  : "4vw",
-            });
-
-            gsap.to(span[videoId], {
-              width: `${currentProgress}%`,
-              backgroundColor: "white",
-            });
-          }
+    hightlightsSlides.forEach((_, index) => {
+      ScrollTrigger.create({
+        trigger: `#video-${index}`,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => {
+          handleVideoRestart(index);
+          animateText(index);
+          animateTextList(index);
+          setVideo((prev) => ({ ...prev, videoId: index, isVideoVisible: true }));
         },
-        onComplete: () => {
-          if (isPlaying) {
-            gsap.to(videoDivRef.current[videoId], {
-              width: "12px",
-            });
-            gsap.to(span[videoId], {
-              backgroundColor: "#afafaf",
-            });
-          }
+        onEnterBack: () => {
+          handleVideoRestart(index);
+          animateText(index);
+          animateTextList(index);
+          setVideo((prev) => ({ ...prev, videoId: index, isVideoVisible: true }));
+        },
+        onLeave: () => {
+          setVideo((prev) => ({ ...prev, isVideoVisible: false }));
+        },
+        onLeaveBack: () => {
+          setVideo((prev) => ({ ...prev, isVideoVisible: false }));
         },
       });
+    });
+  }, []);
 
-      if (videoId === 0) {
-        anim.restart();
-      }
-
-      const animUpdate = () => {
-        if (videoRef.current[videoId]) {
-          anim.progress(
-            videoRef.current[videoId].currentTime /
-              hightlightsSlides[videoId].videoDuration
-          );
-        }
-      };
-
-      if (isPlaying) {
-        gsap.ticker.add(animUpdate);
-      } else {
-        gsap.ticker.remove(animUpdate);
-      }
-    }
-  }, [videoId, startPlay]);
-
-  useEffect(() => {
-    if (loadedData.length > 3) {
-      if (!isPlaying && videoRef.current[videoId]) {
-        videoRef.current[videoId].pause();
-      } else if (startPlay && videoRef.current[videoId]) {
-        videoRef.current[videoId].play();
-      }
-    }
-  }, [startPlay, videoId, isPlaying, loadedData]);
-
-  const handleProcess = (type, i) => {
-    switch (type) {
-      case "video-end":
-        setVideo((pre) => ({ ...pre, isEnd: true, videoId: i + 1 }));
-        break;
-      case "video-last":
-        setVideo((pre) => ({ ...pre, isLastVideo: true }));
-        break;
-      case "video-reset":
-        setVideo((pre) => ({ ...pre, videoId: 0, isLastVideo: false }));
-        break;
-      case "pause":
-      case "play":
-        setVideo((pre) => ({ ...pre, isPlaying: !pre.isPlaying }));
-        break;
-      default:
-        return video;
+  const handleVideoRestart = (index) => {
+    const videoElement = videoRef.current[index];
+    if (videoElement) {
+      videoElement.currentTime = 0;
+      videoElement.play();
     }
   };
 
-  const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e]);
+  const animateText = (index) => {
+    gsap.fromTo(
+      `#text-${index}`,
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power2.out" }
+    );
+  };
+
+  const animateTextList = (index) => {
+    gsap.fromTo(
+      textListRef.current[index],
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power2.out", stagger: 0.2 }
+    );
+  };
 
   return (
-    <>
-      <div className="flex items-center">
-        {hightlightsSlides.map((list, i) => (
-          <div key={list.id} id="slider" className="sm:pr-20 pr-10">
-            <div className="video-carousel_container">
-              <div className="w-full h-full flex-center rounded-3xl overflow-hidden bg-black">
-                <video
-                  id="video"
-                  playsInline={true}
-                  className={`${list.id === 2 ? "translate-x-44" : ""} pointer-events-none`}
-                  preload="auto"
-                  muted
-                  ref={(el) => (videoRef.current[i] = el)}
-                  onEnded={() =>
-                    i !== 3
-                      ? handleProcess("video-end", i)
-                      : handleProcess("video-last")
-                  }
-                  onPlay={() =>
-                    setVideo((pre) => ({ ...pre, isPlaying: true }))
-                  }
-                  onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
+    <div className="relative min-h-screen text-white">
+      <section className="hero-section relative w-full bg-zinc">
+        {hightlightsSlides.map((slide, index) => (
+          <div
+            key={slide.id}
+            id={`video-${index}`}
+            className={`relative ${index === hightlightsSlides.length - 1 ? 'h-[80vh]' : 'h-screen'} w-full mb-8`}
+          >
+            <div className="absolute top-4 left-4 z-20 flex flex-col items-start">
+              {slide.textLists && slide.textLists.map((text, idx) => (
+                <p
+                  key={idx}
+                  ref={(el) => (textListRef.current[index] = el)}
+                  className="text-xl sm:text-2xl md:text-3xl font-semibold text-left"
                 >
-                  <source src={list.video} type="video/mp4" />
-                </video>
-              </div>
+                  {text}
+                </p>
+              ))}
+            </div>
 
-              <div className="absolute top-12 left-[5%] z-10">
-                {list.textLists.map((text, index) => (
-                  <p key={index} className="md:text-2xl text-xl font-medium">
-                    {text}
-                  </p>
-                ))}
-              </div>
+            <video
+              ref={(el) => (videoRef.current[index] = el)}
+              className="w-full h-full object-cover opacity-80"
+              src={slide.video}
+              muted
+              playsInline
+            ></video>
+
+            <div
+              id={`text-${index}`}
+              className="absolute inset-0 flex items-center justify-start p-4"
+            >
+              <h1 className="hero-text text-2xl sm:text-4xl md:text-6xl font-bold text-white text-left">
+                {slide.text}
+              </h1>
             </div>
           </div>
         ))}
-      </div>
 
-      <div className="relative flex-center mt-10">
-        <div className="flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
-          {videoRef.current.map((_, i) => (
-            <span
-              key={i}
-              className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
-              ref={(el) => (videoDivRef.current[i] = el)}
-            >
-              <span
-                className="absolute h-full w-full rounded-full"
-                ref={(el) => (videoSpanRef.current[i] = el)}
-              />
-            </span>
-          ))}
-        </div>
-
-        <button className="control-btn">
-          <img
-            src={isLastVideo ? replayImg : !isPlaying ? playImg : pauseImg}
-            alt={isLastVideo ? "replay" : !isPlaying ? "play" : "pause"}
-            onClick={() =>
-              isLastVideo
-                ? handleProcess("video-reset")
-                : handleProcess(isPlaying ? "pause" : "play")
-            }
-          />
-        </button>
-      </div>
-    </>
+        {isVideoVisible && (
+          <div className="scroll-indicator fixed right-4 top-1/2 transform -translate-y-1/2 bg-white w-8 h-20 rounded-full shadow-md flex flex-col items-center justify-center z-50">
+            {hightlightsSlides.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-3 h-3 my-1 rounded-full ${
+                  idx === videoId ? "bg-[#ed9254]" : "bg-gray-300"
+                }`}
+              ></div>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
   );
 };
 
