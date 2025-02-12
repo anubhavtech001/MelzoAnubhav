@@ -1,14 +1,14 @@
 import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
-import { useGLTF, useTexture, OrbitControls } from "@react-three/drei"; // Added OrbitControls
+import { useGLTF, useTexture, OrbitControls } from "@react-three/drei";
 
 function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene.glb");
   const modelRef = useRef(null);
   const texture = useTexture(props.item.img);
-  const brandingTexture = useTexture("../assets/images/ANUBHAV@4x.png"); // Updated path
+  const brandingTexture = useTexture("../assets/images/ANUBHAV@4x.png");
 
-  const blackMeshes = ["Mesh_1_4", "Mesh_1_5", "Mesh_1_8", "Mesh_1_11", "Mesh_1_12", "Mesh_1_13"]; // Add mesh names here to make them black
+  const blackMeshes = ["Mesh_1_4", "Mesh_1_5", "Mesh_1_8", "Mesh_1_11", "Mesh_1_12", "Mesh_1_13"];
 
   useEffect(() => {
     Object.entries(nodes).forEach(([name, node]) => {
@@ -24,7 +24,7 @@ function Model(props) {
 
         if (!excludedMaterials.includes(material.name)) {
           if (blackMeshes.includes(name)) {
-            material.color = new THREE.Color("#595959"); // Set to greyish black
+            material.color = new THREE.Color("#595959");
           } else {
             material.color = new THREE.Color(props.item.color[0]);
           }
@@ -38,6 +38,8 @@ function Model(props) {
     });
   }, [nodes, props.item]);
 
+  
+
   return (
     <>
       <OrbitControls 
@@ -46,10 +48,12 @@ function Model(props) {
         enableRotate={true} 
         maxPolarAngle={Math.PI} 
         minPolarAngle={0} 
-      /> {/* Updated OrbitControls for full rotation */}
+        minDistance={15}  // Standardized minimum zoom distance
+        maxDistance={20} // Standardized maximum zoom distance
+      />
 
-      <group {...props} dispose={null} ref={modelRef}>
-        <group position={[-0.75, 1.023, 0.055]} scale={0.148}>
+<group {...props} dispose={null} ref={modelRef} rotation={[0, Math.PI / 2, 0]}> {/* Default rotation 90 degrees */}
+<group position={[-0.75, 1.023, 0.055]} scale={0.148}>
           <group position={[5.084, -6.932, -0.376]}>
             {Object.keys(nodes).map((key, index) => (
               nodes[key].geometry && nodes[key].material ? (
@@ -65,33 +69,33 @@ function Model(props) {
           </group>
         </group>
 
-        {/* Branding Planes on All Sides */}
-        <mesh position={[0, -3, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[1, 0.4, 1]}>
+        {/* Branding Planes with Smaller Logo */}
+        <mesh position={[0, -3, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>
 
-        <mesh position={[0, 0, -3]} rotation={[0, 0, 0]} scale={[1, 0.4, 1]}> {/* Back Side */}
+        <mesh position={[0, 0, -3]} rotation={[0, 0, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>
 
-        <mesh position={[0, 0, 3]} rotation={[0, Math.PI, 0]} scale={[1, 0.4, 1]}> {/* Front Side */}
+        <mesh position={[0, 0, 3]} rotation={[0, Math.PI, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>
 
-        <mesh position={[-3, 0, 0]} rotation={[0, Math.PI / 2, 0]} scale={[1, 0.4, 1]}> {/* Left Side */}
+        <mesh position={[-3, 0, 0]} rotation={[0, Math.PI / 2, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>
 
-        <mesh position={[3, 0, 0]} rotation={[0, -Math.PI / 2, 0]} scale={[1, 0.4, 1]}> {/* Right Side */}
+        <mesh position={[3, 0, 0]} rotation={[0, -Math.PI / 2, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>
 
-        <mesh position={[0, 3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1, 0.4, 1]}> {/* Top Side */}
+        <mesh position={[0, 3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>

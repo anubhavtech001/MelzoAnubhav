@@ -18,8 +18,8 @@ const App = () => {
       <Model />
       <Features />
       <HowItWorks />
-      {/* <Inquiry /> */}
       <Footer />
+      {/* <Inquiry /> */}
     </main>
     </div>
   );
