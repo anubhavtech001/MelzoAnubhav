@@ -52,7 +52,6 @@ const HowItWorks = () => {
       scrollTrigger: {
         trigger: "#chip",
         start: "20% bottom",
-        // end: "top top",
         scrub: true,
         pinType: "transform",  // ✅ Fixes sticky issues on iOS
         invalidateOnRefresh: true,  // ✅ Handles screen resize/orientation changes
@@ -72,7 +71,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section className="common-padding">
+    <section className="common-padding overflow-hidden">
       <div className="screen-max-width">
         <div id="chip" className="flex-center w-full my-20">
           <img src={chipImg} alt="chip" width={180} height={180} />
@@ -101,7 +100,7 @@ const HowItWorks = () => {
                 className="bg-transparent relative z-10"
               />
             </div>
-            <div className="hiw-video" id="chip">
+            <div className="hiw-video">
               <video
               id="chip"
                 className="pointer-events-none"
