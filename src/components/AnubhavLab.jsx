@@ -29,10 +29,12 @@ function Model(props) {
             material.color = new THREE.Color(props.item.color[0]);
           }
 
-          material.roughness = 0.8;
-          material.metalness = 0.2;
-          material.bumpScale = 0.05;
+          material.roughness = 0.6;   // Reduced roughness for a subtle sheen
+          material.metalness = 0.3;   // Increased slightly to enhance highlights
+          material.bumpScale = 0.1;   // More pronounced texture for leather detail
+          material.normalScale = new THREE.Vector2(0.8, 0.8); // Adds more leather grain effect
           material.needsUpdate = true;
+          
         }
       }
     });
@@ -42,15 +44,16 @@ function Model(props) {
 
   return (
     <>
-      <OrbitControls 
-        enableZoom={true} 
-        enablePan={true} 
-        enableRotate={true} 
-        maxPolarAngle={Math.PI} 
-        minPolarAngle={0} 
-        minDistance={15}  // Standardized minimum zoom distance
-        maxDistance={20} // Standardized maximum zoom distance
-      />
+     <OrbitControls 
+  enableZoom={true} 
+  enablePan={true} 
+  enableRotate={true} 
+  maxPolarAngle={Math.PI} 
+  minPolarAngle={0} 
+  minDistance={20}
+  maxDistance={25}
+/>
+
 
 <group {...props} dispose={null} ref={modelRef} rotation={[0, Math.PI / 2, 0]}> {/* Default rotation 90 degrees */}
 <group position={[-0.75, 1.023, 0.055]} scale={0.148}>
@@ -70,7 +73,7 @@ function Model(props) {
         </group>
 
         {/* Branding Planes with Smaller Logo */}
-        <mesh position={[0, -3, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.5, 0.2, 0.5]}>
+        {/* <mesh position={[0, -3, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
         </mesh>
@@ -98,7 +101,7 @@ function Model(props) {
         <mesh position={[0, 3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[0.5, 0.2, 0.5]}>
           <planeGeometry args={[5, 2]} />
           <meshBasicMaterial map={brandingTexture} transparent />
-        </mesh>
+        </mesh> */}
       </group>
     </>
   );

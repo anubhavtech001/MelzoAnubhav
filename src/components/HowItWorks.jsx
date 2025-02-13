@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll({
   allowNestedScroll: true,
   lockAxis: false,
-  momentum: (self) => Math.min(2, self.velocityY / 1000),
+  momentum: (self) => Math.min(1.5, self.velocityY / 800),
   type: "touch,wheel,pointer",
 });
 
@@ -79,13 +79,13 @@ const HowItWorks = () => {
 
         <div className="flex flex-col items-center">
           <h2 className="hiw-title">
-            Anubhav Lab chip.
-            <br /> A unique way to Learn.
+            Anubhav S1 chip
+            <br /> A unique way to Learn
           </h2>
 
           <p className="hiw-subtitle">
-            The Anubhav Lab chip integrates embedded Bluetooth technology,
-            ensuring seamless connectivity with Meta Quest device for an
+            The Anubhav S1 chip integrates embedded Bluetooth technology,
+            ensuring seamless connectivity with Virtual Reality Headset for an
             enhanced 5D experience.
             {/* It's here. The biggest redesign in the history of Anubhav Lab chip. */}
           </p>
@@ -122,28 +122,28 @@ const HowItWorks = () => {
 
         <div className="hiw-text-container">
           <div className="flex flex-1 justify-center flex-col">
-            <p className="hiw-text g_fadeIn">
+            <p className="hiw-subtitle g_fadeIn">
               Anubhav Lab is a breakthrough in 5D technology, setting a{" "}
-              <span className="text-white">
+              <span className="">
                 new benchmark for performance and future digital innovation
               </span>
-              .
-            </p>
-
-            <p className="hiw-text g_fadeIn">
-              Anubhav{" "}
-              <span className="text-white">
+              . Anubhav{" "}
+              <span className="">
                 tours will look and feel so immersive
               </span>
               , with incredibly detailed environments and effects.
             </p>
+
+            <p className="hiw-text g_fadeIn">
+              
+            </p>
           </div>
 
-          <div className="flex-1 flex justify-center flex-col g_fadeIn">
+          {/* <div className="flex-1 flex justify-center flex-col g_fadeIn">
             <p className="hiw-text">New</p>
             <p className="hiw-bigtext">5D Lab</p>
             <p className="hiw-text">with safety</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

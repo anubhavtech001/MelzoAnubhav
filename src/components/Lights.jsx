@@ -2,70 +2,123 @@ import { Environment, Lightformer } from "@react-three/drei";
 
 const Lights = () => {
   return (
-    // group different lights and lightformers. We can use group to organize lights, cameras, meshes, and other objects in the scene.
     <group name="lights">
-      {/**
-       * @description Environment is used to create a background environment for the scene
-       * https://github.com/pmndrs/drei?tab=readme-ov-file#environment
+      {/** 
+       * Ambient light to provide base illumination without over-brightening the scene.
+       * Reduced intensity to maintain leather contrast.
        */}
-      <Environment resolution={256}>
+      <ambientLight intensity={0.15} color={"#777777"} />
+
+      {/**
+       * Directional light for shadows and texture depth.
+       * Slightly lowered intensity to prevent over-brightening.
+       */}
+      <directionalLight
+        intensity={1.2} // Reduced brightness
+        position={[3, 5, -3]}
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        color={"#ffffff"}
+      />
+
+      {/**
+       * Environment lighting for indirect illumination.
+       * Lowered intensity to keep a leather-cut effect.
+       */}
+      <Environment resolution={256} preset="warehouse">
         <group>
-          {/**
-           * @description Lightformer used to create custom lights with various shapes and properties in a 3D scene.
-           * https://github.com/pmndrs/drei?tab=readme-ov-file#lightformer
+          {/** 
+           * Key Light - Reduced intensity for better contrast.
            */}
           <Lightformer
             form="rect"
-            intensity={3}
-            position={[-1, 0, -10]}
+            intensity={2.5} // Lower intensity
+            position={[-2, 1, -10]}
             scale={5}
-            color={"#fff"}
+            color={"#cccccc"}
           />
+
+          {/** Soft Fill Light from Side-Left */}
           <Lightformer
             form="rect"
-            intensity={1}
-            position={[-10, 2, 1]}
-            scale={5}
+            intensity={1} // Lowered for more shadows
+            position={[-8, 3, 2]}
+            scale={4}
             rotation-y={Math.PI / 2}
+            color={"#999999"}
           />
+
+          {/** Rim Light from Side-Right */}
           <Lightformer
             form="rect"
-            intensity={1}
-            position={[10, 0, 1]}
-            scale={5}
+            intensity={1.2} // Less rim brightness
+            position={[8, 2, 1]}
+            scale={4}
             rotation-y={Math.PI / 2}
+            color={"#aaaaaa"}
+          />
+
+          {/** Overhead Light for Texture Highlights */}
+          <Lightformer
+            form="circle"
+            intensity={1.5} // Soft light for texture depth
+            position={[0, 8, 0]}
+            scale={3}
+            color={"#888888"}
+          />
+
+          {/** SpotLight for Leather Texture Details */}
+          <spotLight
+            intensity={2} // Slightly dimmer
+            position={[0, 3, 3]}
+            angle={0.3}
+            penumbra={0.6}
+            castShadow
+            color={"#ffffff"}
+          />
+
+          {/** Point Light for Subtle Surface Details */}
+          <pointLight
+            intensity={1.5} // Reduced highlight effect
+            position={[2, 2, -4]}
+            decay={1.8}
+            distance={10}
+            color={"#cccccc"}
+          />
+
+          {/** Ground Fill Light - Soft & Subtle */}
+          <Lightformer
+            form="circle"
+            intensity={0.8} // Reduced brightness
+            position={[0, -4, 0]}
+            scale={2}
+            color={"#666666"}
           />
         </group>
       </Environment>
 
       {/**
-       * @description spotLight is used to create a light source positioned at a specific point
-       * in the scene that emits light in a specific direction.
-       * https://threejs.org/docs/#api/en/lights/SpotLight
+       * Additional spotlights for controlled shadows and contrast.
        */}
-      {/* <spotLight
-        position={[-2, 10, 5]}
-        angle={0.15}
-        penumbra={1} // the penumbra is the soft edge of a shadow cast by a point light
-        decay={0} // the amount the light dims as it moves away from the source
-        intensity={Math.PI * 0.2} // the light intensity
-        color={"#f8f9fa"}
-      />
       <spotLight
-        position={[0, -25, 10]}
-        angle={0.15}
-        penumbra={1}
-        decay={0}
-        intensity={Math.PI * 0.2}
-        color={"#f8f9fa"}
+        position={[-3, 6, 4]}
+        angle={0.2}
+        penumbra={0.4}
+        decay={0.5}
+        intensity={1.5} // Reduced intensity
+        color={"#dddddd"}
+        castShadow
       />
+
       <spotLight
-        position={[0, 15, 5]}
-        angle={0.15}
-        penumbra={1}
-        decay={0.1}
-        intensity={Math.PI * 3}
-      /> */}
+        position={[0, 7, 3]}
+        angle={0.3}
+        penumbra={0.5}
+        decay={0.8}
+        intensity={1.8} // Slightly dimmer for shadow emphasis
+        castShadow
+      />
     </group>
   );
 };

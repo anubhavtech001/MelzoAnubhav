@@ -1,12 +1,16 @@
 import gsap from "gsap";
-
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { heroVideo, smallHeroVideo } from "../utils";
+import { useEffect, useState } from "react";
+
 gsap.registerPlugin(ScrollTrigger);
 
+// Normalize scrolling across devices
 ScrollTrigger.normalizeScroll({
   allowNestedScroll: true,
   lockAxis: false,
-  momentum: (self) => Math.min(2, self.velocityY / 1000),
+  momentum: (self) => Math.min(1.5, self.velocityY / 800),
   type: "touch,wheel,pointer",
 });
 
@@ -14,33 +18,17 @@ window.addEventListener("orientationchange", () => {
   ScrollTrigger.refresh();
 });
 
-// return () => {
-//   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-// };
-
-import { useGSAP } from "@gsap/react";
-import { heroVideo, smallHeroVideo } from "../utils";
-import { useEffect, useState } from "react";
-
 const Hero = () => {
   const [videoSrc, setVideoSrc] = useState(
-    // window.innerWidth < 760 ? smallHeroVideo : heroVideo
-    window.innerWidth < 760 ? heroVideo : heroVideo
-    
+    window.innerWidth < 760 ? smallHeroVideo : heroVideo
   );
 
   const handleVideoSrcSet = () => {
-    if (window.innerWidth < 760) {
-      // setVideoSrc(smallHeroVideo);
-      setVideoSrc(heroVideo);
-    } else {
-      setVideoSrc(heroVideo);
-    }
+    setVideoSrc(window.innerWidth < 760 ? smallHeroVideo : heroVideo);
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleVideoSrcSet);
-
     return () => {
       window.removeEventListener("resize", handleVideoSrcSet);
     };
@@ -52,17 +40,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full nav-height bg-black relative ">
-      <div className="h-5/6 w-full flex-center flex-col "> 
-        {/* <p id="hero" className="hero-title">
-        Anubhav 5D Lab
-        </p> */}
-        <div className="sm:w-full sm:h-full md:w-full w-9/12 xl:h-[75vh]  ">
+    <section className="w-full min-h-screen bg-black relative flex flex-col justify-center items-center">
+      {/* Hero Container */}
+      <div className="w-full min-h-[50vh] md:min-h-[60vh] lg:min-h-[70vh] xl:min-h-[80vh] flex justify-center items-center">
+        <div className="w-full max-w-screen-xl h-full flex justify-center items-center">
           <video
-            className="pointer-events-none "
+            className="pointer-events-none w-full h-auto max-h-[90vh] object-cover rounded-xl"
             autoPlay
             muted
-            playsInline={true}
+            playsInline
             key={videoSrc}
           >
             <source src={videoSrc} type="video/mp4" />
@@ -70,14 +56,14 @@ const Hero = () => {
         </div>
       </div>
 
-      <div
-        id="cta"
-        className="flex flex-col items-center opacity-0 translate-y-20"
-      >
-        <a href="https://forms.gle/m4hkPxqiBUnDwk5cA" className="btn">
+      {/* Call to Action */}
+      <div id="cta" className="flex flex-col items-center opacity-0 translate-y-20 mt-6">
+        <a
+          href="https://forms.gle/m4hkPxqiBUnDwk5cA"
+          className="btn px-6 py-3 bg-[#ed9254] text-white text-lg font-semibold rounded-lg hover:bg-[#c77430] transition duration-300"
+        >
           Book a Demo
         </a>
-        {/* <p className="font-normal text-xl">From $199/month or $999</p> */}
       </div>
     </section>
   );

@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import * as Sentry from "@sentry/react";
 import HowItWorks from "./components/HowItWorks";
 import Footer from "./components/Footer";
+import Faq from "./components/Faq";
 // import Inquiry from "./components/Inquiry";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Model />
       <Features />
       <HowItWorks />
+      <Faq />
       <Footer />
       {/* <Inquiry /> */}
     </main>

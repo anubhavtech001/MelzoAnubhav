@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll({
   allowNestedScroll: true,
   lockAxis: false,
-  momentum: (self) => Math.min(2, self.velocityY / 1000),
+  momentum: (self) => Math.min(1.5, self.velocityY / 800),
   type: "touch,wheel,pointer",
 });
 
@@ -37,11 +37,11 @@ const Highlights = () => {
       <div className="screen-max-width">
         <div className="mb-12 w-full md:flex items-end justify-between xl:mt-56 ">
           <h1 id="title" className="section-heading">
-            Get the highlights.
+            Get the highlights
           </h1>
 
           <div className="flex flex-wrap items-end gap-5">
-            <a href="https://divya.bhaskar.com/q3xicwgh7Pb">
+            <a href="https://www.youtube.com/watch?v=uUts3cRhrg0">
               <p className="link">
                 Watch the Interview
                 <img src={watchImg} alt="watch" className="ml-2" />

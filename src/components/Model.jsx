@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll({
   allowNestedScroll: true,
   lockAxis: false,
-  momentum: (self) => Math.min(2, self.velocityY / 1000),
+  momentum: (self) => Math.min(1.5, self.velocityY / 800),
   type: "touch,wheel,pointer",
 });
 
@@ -32,8 +32,8 @@ import { animateWithGsapTimeline } from "../utils/animations";
 const Model = () => {
   const [size, setSize] = useState("small");
   const [model, setModel] = useState({
-    title: "Anubhav 5D Lab in Orange",
-    color: ["#ed9254", "#ffe7b9", "#000"],
+    title: "Anubhav 5D Lab in Golden Yellow",
+    color: ["#977133", "#000", "#000"],
     img: yellowImg,
   });
 
@@ -75,11 +75,18 @@ const Model = () => {
     <section className="common-padding">
       <div className="screen-max-width">
         <h1 id="heading" className="section-heading">
-          Take a closer look.
+          Take a closer look
         </h1>
 
         <div className="flex flex-col items-center mt-5">
-          <div className="w-full h-[75vh] md:h-[90vh] overflow-hidden relative">
+        <div className="
+          w-full 
+          max-w-[95vw] sm:max-w-[80vw] md:max-w-[70vw] 
+          **lg:max-w-[60vw] xl:max-w-[50vw] 2xl:max-w-[40vw]** 
+          bg-black 
+          h-[50vh] sm:h-[60vh] md:h-[75vh] 
+          **lg:h-[90vh] xl:h-[100vh] 2xl:h-[110vh]** 
+          overflow-hidden relative rounded-lg flex justify-center items-center"> 
             <ModelView
               index={1}
               groupRef={small}
@@ -116,15 +123,23 @@ const Model = () => {
             </Canvas>
           </div>
 
-          <div className="mx-auto w-full">
-            <p className="text-sm font-light text-center mb-5">{model.title}</p>
-
-            <div className="flex-center">
-              <ul className="color-container">
+          <div className="w-full **px-5 sm:px-10 lg:px-20 xl:px-32** mt-5"> {/* ✅ Adjusted padding for large screens */}
+            <p className="
+            text-sm sm:text-base md:text-lg 
+            **lg:text-xl xl:text-2xl** 
+            font-light text-center mb-5"> {/* ✅ Increased font size for large screens */}
+              {model.title}
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              {/* Color Selector */}
+              <ul className="flex justify-center">
                 {models.map((item, i) => (
                   <li
                     key={i}
-                    className="w-6 h-6 rounded-full mx-2 cursor-pointer"
+                    className="
+                    w-6 h-6 sm:w-8 sm:h-8 
+                    **lg:w-10 lg:h-10** 
+                    rounded-full mx-2 cursor-pointer border border-white" 
                     style={{ backgroundColor: item.color[0] }}
                     onClick={() => setModel(item)}
                   />

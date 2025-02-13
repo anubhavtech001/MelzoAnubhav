@@ -90,7 +90,7 @@ const VideoCarousel = () => {
 
             <video
               ref={(el) => (videoRef.current[index] = el)}
-              className="w-full mb-5 h-auto object-contain opacity-80 transition-transform duration-500 ease-in-out"
+              className="w-full mb-5 h-auto object-contain opacity-80 transition-transform duration-500 ease-in-out rounded-xl overflow-hidden"
               src={slide.video}
               muted
               playsInline
@@ -100,14 +100,14 @@ const VideoCarousel = () => {
               id={`text-${index}`}
               className="absolute inset-0 flex items-center justify-start p-2"
             >
-              <h1 className="hero-text text-lg sm:text-xl md:text-2xl font-bold text-white text-left">
+              <h1 className="hero-text text-2xl sm:text-xs md:text-sm font-bold text-white text-left">
                 {slide.text}
               </h1>
             </div>
           </div>
         ))}
 
-{isVideoVisible && (
+{/* {isVideoVisible && (
           <div className="scroll-indicator fixed right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white w-6 md:w-8 h-16 md:h-20 rounded-full shadow-md flex flex-col items-center justify-center z-50">
             {hightlightsSlides.map((_, idx) => (
               <div
@@ -118,7 +118,7 @@ const VideoCarousel = () => {
               ></div>
             ))}
           </div>
-        )}
+        )} */}
       </section>
     </div>
   );

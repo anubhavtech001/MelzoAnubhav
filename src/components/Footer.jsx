@@ -3,7 +3,7 @@ import { footerLinks } from "../constants";
 import { FaXTwitter, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa6";
 
 const Footer = () => {
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(true);
   const mapRef = useRef(null);
 
   const toggleMap = () => {
@@ -17,7 +17,7 @@ const Footer = () => {
   }, [showMap]);
 
   return (
-    <footer className="py-5 sm:px-10 px-5 bg-zinc text-white relative z-20">
+    <footer className="py-5 sm:px-10 px-5 bg-black text-white relative z-20 " id="footer">
 
       <div className="screen-max-width">
         <div>
@@ -31,9 +31,11 @@ const Footer = () => {
             </span>{" "}
             near you.
           </p>
-          <p className="font-semibold text-white text-xs">
-            Or call (+91) 9687488818
-          </p>
+          
+          <a href="tel:+919687488818" className="font-semibold text-white text-xs cursor-pointer hover:text-[#ed9254] transition duration-300">
+  Or call (+91) 9687488818.
+</a>
+
         </div>
 
         <div className="bg-neutral-700 my-5 h-[1px] w-full" />
