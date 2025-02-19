@@ -30,9 +30,22 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleVideoSrcSet);
-    return () => window.removeEventListener("resize", handleVideoSrcSet);
+    const handleResize = () => {
+      handleVideoSrcSet();
+      setTimeout(() => {
+        ScrollTrigger.refresh(); // ✅ Ensures video updates on rotation
+      }, 300);
+    };
+  
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+  
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
   }, []);
+  
 
   useGSAP(() => {
     gsap.set("#hero", { opacity: 1 });
@@ -46,8 +59,8 @@ const Hero = () => {
       className="w-full min-h-screen bg-black relative flex flex-col justify-center items-center"
     >
       {/* Hero Container */}
-      <div className="w-full flex justify-center items-center">
-        <div className="w-full max-w-screen-xl flex justify-center items-center">
+      <div className="w-full flex justify-center items-center min-h-[70vh] lg:min-h-[85vh]">
+      <div className="w-full max-w-screen-xl flex justify-center items-center">
           <video
             className="pointer-events-none w-full object-cover rounded-xl"
             autoPlay
@@ -55,10 +68,13 @@ const Hero = () => {
             playsInline
             key={videoSrc}
             style={{
-              maxHeight: "90vh", // ✅ Increased for `sm` & `md` Devices
-              minHeight: "60vh", // ✅ Ensures better visibility
-              aspectRatio: "16/9", // ✅ Maintains aspect ratio across devices
+              width: "100%", // ✅ Ensures full width on rotation
+              height: "auto", // ✅ Auto height to prevent cutting on `lg`
+              maxHeight: "100vh", // ✅ Allows full height without being cut off
+              minHeight: "70vh", // ✅ Increased min-height for better visibility
+              aspectRatio: "16/9", // ✅ Maintains correct scaling
             }}
+            
           >
             <source src={videoSrc} type="video/mp4" />
           </video>
