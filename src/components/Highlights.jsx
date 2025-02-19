@@ -47,9 +47,12 @@ const Highlights = () => {
                 <img src={watchImg} alt="watch" className="ml-2" />
               </p>
             </a>
-            <a href="https://drive.google.com/file/d/1ay6AHuu7fCQVGlIlZGPdkRPHj64A-NZj/view?usp=sharing">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1ay6AHuu7fCQVGlIlZGPdkRPHj64A-NZj"
+              download
+            >
               <p className="link">
-              Download the Brochure
+                Download the Brochure
                 <img src={rightImg} alt="right" className="ml-2" />
               </p>
             </a>

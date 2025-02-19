@@ -56,7 +56,7 @@ const Navbar = () => {
               onClick={() => {
                 if (nav === "Home") {
                   window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Scrolls to the top
-                } else if (nav === "About Us") {
+                } else if (nav === "Contact Us") {
                   scrollToFooter(); 
                 } else if (nav === "Book a Demo") {
                   window.open("https://forms.gle/m4hkPxqiBUnDwk5cA", "_blank");
@@ -105,7 +105,7 @@ const Navbar = () => {
                 if (nav === "Home") {
                   window.scrollTo({ top: 0, behavior: "smooth" }); 
                   setIsMenuOpen(false); // ✅ Close menu after scrolling
-                } else if (nav === "About Us") {
+                } else if (nav === "Contact Us") {
                   scrollToFooter();
                   setIsMenuOpen(false);
                 } else if (nav === "Book a Demo") {

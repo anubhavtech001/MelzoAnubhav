@@ -70,7 +70,14 @@ const Model = () => {
   useGSAP(() => {
     gsap.to("#heading", { y: 0, opacity: 1 });
   }, []);
-
+// Function to Handle Rotation Update and Restrict Z-axis
+const handleRotationUpdate = (rotationSetter, rotation) => {
+  rotationSetter({
+    x: rotation.x, // Keep X-axis rotation
+    y: rotation.y, // Keep Y-axis rotation
+    z: 0, // Disable Z-axis rotation
+  });
+};
   return (
     <section className="common-padding">
       <div className="screen-max-width">
@@ -80,19 +87,28 @@ const Model = () => {
 
         <div className="flex flex-col items-center mt-5">
         <div className="
-          w-full 
-          max-w-[95vw] sm:max-w-[80vw] md:max-w-[70vw] 
-          **lg:max-w-[60vw] xl:max-w-[50vw] 2xl:max-w-[40vw]** 
-          bg-black 
-          h-[50vh] sm:h-[60vh] md:h-[75vh] 
-          **lg:h-[90vh] xl:h-[100vh] 2xl:h-[110vh]** 
-          overflow-hidden relative rounded-lg flex justify-center items-center"> 
+            w-full 
+            max-w-[60vw] sm:max-w-[50vw] md:max-w-[40vw] 
+            lg:max-w-[30vw] xl:max-w-[25vw] 2xl:max-w-[20vw] 
+            bg-black 
+            h-[20vh] sm:h-[30vh] md:h-[40vh] 
+            lg:h-[50vh] xl:h-[55vh] 2xl:h-[60vh] 
+            overflow-hidden relative rounded-lg flex justify-center items-center">
+          {/* <div className="
+            w-full 
+            max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] 
+            lg:max-w-[50vw] xl:max-w-[40vw] 2xl:max-w-[30vw] 
+            bg-white 
+            h-[30vh] sm:h-[40vh] md:h-[50vh] 
+            lg:h-[60vh] xl:h-[65vh] 2xl:h-[70vh] 
+            overflow-hidden relative rounded-lg flex justify-center items-center"> */}
+            
             <ModelView
               index={1}
               groupRef={small}
               gsapType="view1"
               controlRef={cameraControlSmall}
-              setRotationState={setSmallRotation}
+              setRotationState={(rotation) => handleRotationUpdate(setSmallRotation, rotation)}
               item={model}
               size={size}
             />
@@ -102,7 +118,7 @@ const Model = () => {
               groupRef={large}
               gsapType="view2"
               controlRef={cameraControlLarge}
-              setRotationState={setLargeRotation}
+              setRotationState={(rotation) => handleRotationUpdate(setSmallRotation, rotation)}
               item={model}
               size={size}
             />
