@@ -38,8 +38,9 @@ const Footer = () => {
           
 {showMap && (
           <div className="my-5" ref={mapRef}>
+            
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.6999113167167!2d72.8124433!3d21.164337500000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04fbf33426463%3A0xf0df9597decb3b26!2sMelzo!5e0!3m2!1sen!2sin!4v1739341667629!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3720.7201548697185!2d72.8102803!3d21.1635323!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e0f700ae0a7%3A0x10fb22159da5ebd1!2sShilp%20Maitri%20House!5e0!3m2!1sen!2sin!4v1739951227105!5m2!1sen!2sin" 
               width="100%"
               height="450"
               style={{ border: 0 }}
