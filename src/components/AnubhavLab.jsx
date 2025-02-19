@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
-import { useGLTF, useTexture, useFrame } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber"; // ✅ Correct import
 
 function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene.glb");
@@ -29,10 +30,10 @@ function Model(props) {
             material.color = new THREE.Color(props.item.color[0]);
           }
 
-          material.roughness = 0.6;   // Reduced roughness for a subtle sheen
-          material.metalness = 0.3;   // Increased slightly to enhance highlights
-          material.bumpScale = 0.1;   // More pronounced texture for leather detail
-          material.normalScale = new THREE.Vector2(0.8, 0.8); // Adds more leather grain effect
+          material.roughness = 0.6;   
+          material.metalness = 0.3;   
+          material.bumpScale = 0.1;   
+          material.normalScale = new THREE.Vector2(0.8, 0.8); 
           material.needsUpdate = true;
         }
       }
