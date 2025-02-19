@@ -41,11 +41,11 @@ function Model(props) {
   }, [nodes, props.item]);
 
   // ✅ Rotate Model on Its Own Axis
-  useFrame(() => {
-    if (modelRef.current) {
-      modelRef.current.rotation.y += 0.01; // Smooth rotation around Y-axis
-    }
-  });
+  // useFrame(() => {
+  //   if (modelRef.current) {
+  //     modelRef.current.rotation.y += 0.01; // Smooth rotation around Y-axis
+  //   }
+  // });
 
   return (
     <group {...props} dispose={null} ref={modelRef} rotation={[0, Math.PI / 2, 0]}>
