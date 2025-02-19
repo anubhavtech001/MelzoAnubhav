@@ -45,13 +45,12 @@ function Model(props) {
   return (
     <>
      <OrbitControls 
-  enableZoom={true} 
+  
   enablePan={true} 
   enableRotate={true} 
   maxPolarAngle={Math.PI} 
   minPolarAngle={0} 
-  minDistance={20}
-  maxDistance={25}
+ 
 />
 
 

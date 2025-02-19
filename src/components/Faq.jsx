@@ -9,10 +9,10 @@ const Faq = () => {
   const faqRefs = useRef([]);
 
   useEffect(() => {
-    gsap.set("#features_title", { opacity: 1, y: 0 }); // ✅ Ensure H1 is Instantly Visible
+    gsap.set("#features_title", { opacity: 1, y: 20 }); // ✅ Ensure H1 is Instantly Visible
 
     // ✅ Animate Title on Scroll
-    animateWithGsap("#features_title", { y: -20, opacity: 1 }, { start: "top 85%" });
+    animateWithGsap("#features_title", { y: 0, opacity: 1 }, { start: "top 95%" });
   }, []);
 
   const toggleFAQ = (index) => {

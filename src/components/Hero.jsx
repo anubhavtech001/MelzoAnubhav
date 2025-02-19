@@ -20,36 +20,45 @@ window.addEventListener("orientationchange", () => {
 
 const Hero = () => {
   const [videoSrc, setVideoSrc] = useState(
-    window.innerWidth < 760 ? smallHeroVideo : heroVideo
+    typeof window !== "undefined" && window.innerWidth < 1024 ? smallHeroVideo : heroVideo
   );
 
   const handleVideoSrcSet = () => {
-    setVideoSrc(window.innerWidth < 760 ? smallHeroVideo : heroVideo);
+    if (typeof window !== "undefined") {
+      setVideoSrc(window.innerWidth < 1024 ? smallHeroVideo : heroVideo);
+    }
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleVideoSrcSet);
-    return () => {
-      window.removeEventListener("resize", handleVideoSrcSet);
-    };
+    return () => window.removeEventListener("resize", handleVideoSrcSet);
   }, []);
 
   useGSAP(() => {
+    gsap.set("#hero", { opacity: 1 });
     gsap.to("#hero", { opacity: 1, delay: 2 });
     gsap.to("#cta", { opacity: 1, y: -50, delay: 2 });
   }, []);
 
   return (
-    <section className="w-full min-h-screen bg-black relative flex flex-col justify-center items-center">
+    <section
+      id="hero"
+      className="w-full min-h-screen bg-black relative flex flex-col justify-center items-center"
+    >
       {/* Hero Container */}
-      <div className="w-full min-h-[50vh] md:min-h-[60vh] lg:min-h-[70vh] xl:min-h-[80vh] flex justify-center items-center">
-        <div className="w-full max-w-screen-xl h-full flex justify-center items-center">
+      <div className="w-full flex justify-center items-center">
+        <div className="w-full max-w-screen-xl flex justify-center items-center">
           <video
-            className="pointer-events-none w-full h-auto max-h-[90vh] object-cover rounded-xl"
+            className="pointer-events-none w-full object-cover rounded-xl"
             autoPlay
             muted
             playsInline
             key={videoSrc}
+            style={{
+              maxHeight: "90vh", // ✅ Increased for `sm` & `md` Devices
+              minHeight: "60vh", // ✅ Ensures better visibility
+              aspectRatio: "16/9", // ✅ Maintains aspect ratio across devices
+            }}
           >
             <source src={videoSrc} type="video/mp4" />
           </video>
@@ -57,7 +66,10 @@ const Hero = () => {
       </div>
 
       {/* Call to Action */}
-      <div id="cta" className="flex flex-col items-center opacity-0 translate-y-20 mt-6">
+      <div
+        id="cta"
+        className="flex flex-col items-center opacity-0 translate-y-20 mt-6"
+      >
         <a
           href="https://forms.gle/m4hkPxqiBUnDwk5cA"
           className="btn px-6 py-3 bg-[#ed9254] text-white text-lg font-semibold rounded-lg hover:bg-[#c77430] transition duration-300"

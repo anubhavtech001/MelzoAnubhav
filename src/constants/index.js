@@ -130,10 +130,10 @@ export const faqData = [
     question: "Is Oculus Quest 2 safe for children?",
     answer: "Yes, but Meta recommends it for ages 13 and above. The device has safety features like reduced blue light, IPD adjustment for eye comfort, and anti-flicker displays. However, students should take regular breaks, and screen time should be monitored by teachers or parents.",
   },
-  {
-    question: "Can schools add their own 360° content?",
-    answer: "Schools can easily upload their 360-degree videos by contacting Melzo support team. They can also add 5D effects like mist, vibration, or fragrance to these videos using the provided tools.",
-  },
+  // {
+  //   question: "Can schools add their own 360° content?",
+  //   answer: "Schools can easily upload their 360-degree videos by contacting Melzo support team. They can also add 5D effects like mist, vibration, or fragrance to these videos using the provided tools.",
+  // },
   {
     question: "Can students experience motion sickness?",
     answer: "Some users might experience VR sickness, especially during fast-moving scenes. However, the 5D lab encourages regular breaks and provides a comfortable, well-lit environment to reduce this risk.",
@@ -148,7 +148,7 @@ export const faqData = [
   },
   {
     question: "What makes the 5D lab unique?",
-    answer: "The 5D lab is unique because it combines immersive VR visuals with sensory effects like mist, air, vibrations, and fragrances. It also offers a complete ecosystem with offline functionality and the ability to add custom content.",
+    answer: "The 5D lab is unique because it combines immersive VR visuals with sensory effects like mist, air, vibrations, and fragrances. It also offers a complete ecosystem with offline functionality ",//and the ability to add custom content.
   },
   {
     question: "Can the 5D lab content be updated?",
